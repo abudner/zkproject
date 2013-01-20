@@ -1,0 +1,105 @@
+<window sclass="cardSys" border="none" 
+	apply="org.zkoss.bind.BindComposer"
+	viewModel="@id('vm') @init('com.example.zkproject.mvvm.OsobaVM')" id="mojeOkno">
+	<style src="/widgets/grid/data_binding/style.css" />
+	
+	
+	<hlayout spacing="0" height="370px">
+
+		  
+		
+		<listbox sclass="employee-list" vflex="true" hflex="1"
+			model="@load(vm.osobaManager.osoby)" selectedItem="@bind(vm.selectedOsoba)" >
+			
+			<auxhead>
+				<auxheader colspan="3" class="topic">Osoba List</auxheader>
+			</auxhead>
+			<listhead>
+				<listheader label="Imie" width="143px" align="center" />
+				<listheader label="Nazwisko" width="145px" align="center" />
+				<listheader label="Telefon" width="145px" align="center" />
+				<listheader label="Usuń" width="120px" align="center" />
+			</listhead>
+			<template name="model" var="each">
+				<listitem>
+					<listcell label="@load(each.imie)" />
+					<listcell label="@load(each.nazwisko)" />
+					<listcell label="@load(each.telefon)" />
+					     <listcell>
+                    <button label="Usuń" onClick="@command('usun', osb=each)" />
+                    </listcell>
+				</listitem>
+			</template>
+
+		</listbox>
+		
+		
+		
+		
+		
+		
+		<window sclass="card-pre" title="Wizytówka" hflex="1" vflex="true" border="normal">
+			<div sclass="card">
+				<image sclass="logo" src="/images/icon.png" />
+				<vlayout sclass="title">
+					<label sclass="name" value="@load(vm.selectedOsoba.pobierzImieNazwisko)" />
+				
+				</vlayout>
+				<div sclass="number">
+					
+					<label value="@load(vm.selectedOsoba.telefon)" />
+				</div>
+			</div>
+		</window>
+	</hlayout>
+		<grid>
+		<auxhead>
+			<auxheader colspan="4" class="topic">Dodaj osobe</auxheader>
+		</auxhead>
+		<columns>
+			<column label="Imie" align="center" />
+			<column label="Nazwisko" align="center" />
+			<column label="Telefon" align="center" />
+			<column label="Dodaj" align="center" />
+		
+		
+		</columns>
+		<rows>
+			<row>
+				
+				<textbox value="@bind(vm.nowaOsoba.imie)" width="65%" />
+				<textbox value="@bind(vm.nowaOsoba.nazwisko)" width="65%" />
+				<textbox value="@bind(vm.nowaOsoba.telefon)" width="65%" />
+					    <button label="Dodaj Osobe" 
+                onClick="@command('dodaj')" />
+				
+		
+			</row>
+		</rows>
+	</grid>
+	<grid>
+		<auxhead>
+			<auxheader colspan="3" class="topic">Edytuj osobe</auxheader>
+		</auxhead>
+		<columns>
+			<column label="Imie" align="center" />
+			<column label="Nazwisko" align="center" />
+			<column label="Telefon" align="center" />
+		
+		
+		</columns>
+		<rows>
+			<row>
+				
+				<textbox value="@bind(vm.selectedOsoba.imie)" width="65%" />
+				<textbox value="@bind(vm.selectedOsoba.nazwisko)" width="65%" />
+				<textbox value="@bind(vm.selectedOsoba.telefon)" width="65%" />
+	
+        
+      
+			</row>
+		</rows>
+	</grid>
+	
+	
+</window>
